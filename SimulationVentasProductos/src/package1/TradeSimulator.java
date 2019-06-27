@@ -9,15 +9,14 @@ public class TradeSimulator {
 		// TODO Auto-generated method stub
 		
 		ArrayList<Company> companies = new ArrayList<Company>();
-		
-		private void init() {
-			initCompanies();
-		}
-
 
 	}
+	
+	 private void init() {
+		 initCompanies();
+	 }
 
-		private static void initCompanies() {
+	private static void initCompanies() {
 			Company BigA = new Company("A");
 			Company BigB = new Company("B");
 		
