@@ -5,15 +5,21 @@ import java.util.ArrayList;
 
 public class TradeSimulator {
 	
-	ArrayList<Company> companies = new ArrayList<Company>();
+	static ArrayList<Company> companies = new ArrayList<Company>();
 	
 	private static void init() {
 		 initCompanies();
+		 
+		 
 	 }
 
 	private static void initCompanies() {
 			Company BigA = new Company("A");
 			Company BigB = new Company("B");
+			companies.add(BigA);
+			companies.add(BigB);
+			
+			
 		
 	}
 
