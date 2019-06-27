@@ -9,13 +9,18 @@ public class TradeSimulator {
 		// TODO Auto-generated method stub
 		
 		ArrayList<Company> companies = new ArrayList<Company>();
-			
-		Company BIGA = new Company("A");
-		Company BIGB = new Company("B");
 		
-		System.out.print(BIGA.getName());
-		
+		private void init() {
+			initCompanies();
+		}
 
+
+	}
+
+		private static void initCompanies() {
+			Company BigA = new Company("A");
+			Company BigB = new Company("B");
+		
 	}
 
 }
