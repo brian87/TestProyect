@@ -1,6 +1,6 @@
 package package1;
 
-public class Depot extends Company{
+public class Depot{
 	private int priceProduct;
 	private int priceDelivery;
 	

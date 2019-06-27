@@ -1,6 +1,6 @@
 package package1;
 
-public class Product extends Company
+public class Product 
 {
 	
 }
