@@ -24,7 +24,10 @@ public class TradeSimulator {
 			System.out.println(a);
 			
 			int b = depot.getTypeX();
-			System.out.print(b);
+			System.out.println(b);
+			
+			int c = depot.getCashInitial();
+			System.out.print(c);
 
 
 			

@@ -7,6 +7,7 @@ public class Depot{
 	private Company company;
 	private int typeN;
 	private int typeX;
+	private int cashInitial;
 	
 	ArrayList<Product> products = new ArrayList<Product>();
 	
@@ -18,7 +19,7 @@ public class Depot{
 	
 	public void addcadenaProduct() {
 		
-		for(int i =0; i < 50; i++) {
+		for(int i =0; i < (getTypeN()+ getTypeX()) ; i++) {
 			Product product = new Product();
 			addProduct(product);
 			
@@ -34,5 +35,9 @@ public class Depot{
 		typeX =  (int)(Math.random()*(40-3+1)+3);
 		return typeX;
 	}
-
+	
+	public int getCashInitial() {
+		cashInitial =  (int)(Math.random()*(100-50+1)+50);
+		return cashInitial;
+	}
 }
