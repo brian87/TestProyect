@@ -5,6 +5,8 @@ public class Product
 {
 	private int priceProduct;
 	private int priceDelivery;
+	private String typeN;
+	private String typeX;
 	
 	public int getPriceProduct() {
 		return priceProduct;

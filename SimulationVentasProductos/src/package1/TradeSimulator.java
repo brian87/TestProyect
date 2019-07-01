@@ -19,6 +19,14 @@ public class TradeSimulator {
 			companies.add(BigA);
 			companies.add(BigB);
 			
+			Depot depot = new Depot();
+			int a = depot.getTypeN();
+			System.out.println(a);
+			
+			int b = depot.getTypeX();
+			System.out.print(b);
+
+
 			
 		
 	}
