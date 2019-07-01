@@ -23,7 +23,13 @@ public class Company {
 	}
 	
 	public void addDepot(Depot depot) {
-		 depots.add(depot);
 		
+	}
+	public void addCadenaDepot() {
+		for(int i =0; i < MAX_NO_DEPOTS; i++) {
+			Depot depot = new Depot();
+			addDepot(depot);
+			
+		}
 	}
 }

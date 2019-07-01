@@ -17,7 +17,6 @@ public class TradeSimulator {
 			Company BigA = new Company("A");
 			Company BigB = new Company("B");
 			companies.add(BigA);
-			
 			companies.add(BigB);
 			
 			
