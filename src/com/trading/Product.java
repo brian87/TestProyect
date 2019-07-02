@@ -6,6 +6,10 @@ public class Product {
 	private String type;
 	private Company producer;
 
+	public Product(String name) {
+		this.name=name;
+	}
+
 	public String getName() {
 		return name;
 	}

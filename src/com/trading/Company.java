@@ -7,6 +7,7 @@ public class Company {
 	private String name;
 	private int MAX_NO_DEPOTS = 50;
 	private List<Depot> depots = new ArrayList<Depot>();
+	private List<Product> products = new ArrayList<Product>();
 
 	public Company(String name) {
 		this.name = name;
@@ -33,12 +34,17 @@ public class Company {
 		this.depots = depots;
 	}
 
-	public int getMAX_NO_DEPOTS() {
+	public int getMaxNroDepots() {
 		return MAX_NO_DEPOTS;
 	}
 
-	public void setMAX_NO_DEPOTS(int mAX_NO_DEPOTS) {
-		MAX_NO_DEPOTS = mAX_NO_DEPOTS;
+	public void addProduct(Product product) {
+		product.setProducer(this);
+		products.add(product);
+	}
+
+	public List<Product> getProducts() {
+		return products;
 	}
 	
 	
