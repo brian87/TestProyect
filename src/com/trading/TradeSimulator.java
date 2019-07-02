@@ -22,11 +22,31 @@ public class TradeSimulator {
 		companies.add(companyB);
 		
 		//Depots - Company A
-		companyA.addDepot(new Depot("Depot-1"));		
+		//companyA.addDepot(new Depot("Depot-1"));		
 		//Depots - Company B
-		companyB.addDepot(new Depot("Depot-1"));
+		//companyB.addDepot(new Depot("Depot-1"));
 		
-		//Products - Company A		
+		
+		for (int i = 0; i < companyA.getMAX_NO_DEPOTS();i++) {
+			String nombre = "Depot-"+i;
+			companyA.addDepot(new Depot(nombre));
+		}
+		
+
+		for (int i = 0; i < companyB.getMAX_NO_DEPOTS();i++) {
+			String nombre = "Depot-"+i;
+			companyB.addDepot(new Depot(nombre));
+		}
+		//for (Depot depot : companyA.getMAX_NO_DEPOTS()) {
+		//	CompanyA.addDepot(new Depot ("Depot-1"))    
+		//}
+		//for (Depot depot : companyB.getMAX_NO_DEPOTS()) {
+		//	CompanyA.addDepot(new Depot ("Depot-2"))    
+		//}
+		
+		//Products - Company A	
+		
+		
 	}
 
 	private void print() {

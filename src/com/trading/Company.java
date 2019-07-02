@@ -32,6 +32,14 @@ public class Company {
 	public void setDepots(List<Depot> depots) {
 		this.depots = depots;
 	}
+
+	public int getMAX_NO_DEPOTS() {
+		return MAX_NO_DEPOTS;
+	}
+
+	public void setMAX_NO_DEPOTS(int mAX_NO_DEPOTS) {
+		MAX_NO_DEPOTS = mAX_NO_DEPOTS;
+	}
 	
 	
 
