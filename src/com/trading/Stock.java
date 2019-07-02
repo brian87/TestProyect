@@ -1,6 +1,6 @@
 package com.trading;
 
-public class DepotProduct {
+public class Stock {
 	private Depot depot;
 	private Product product;
 	private Double productPrice;

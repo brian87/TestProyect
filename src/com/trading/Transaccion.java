@@ -3,18 +3,18 @@ package com.trading;
 import java.util.Date;
 
 public class Transaccion {
-	private DepotProduct depotProduct;
+	private Stock depotProduct;
 	private Depot buyerDepot;
 	private Depot sellerDepot;
 	private Integer quantity;
 	private Double total;
 	private Date date;
 
-	public DepotProduct getDepotProduct() {
+	public Stock getDepotProduct() {
 		return depotProduct;
 	}
 
-	public void setDepotProduct(DepotProduct depotProduct) {
+	public void setDepotProduct(Stock depotProduct) {
 		this.depotProduct = depotProduct;
 	}
 

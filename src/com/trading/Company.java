@@ -6,11 +6,10 @@ import java.util.List;
 public class Company {
 	private String name;
 	private int MAX_NO_DEPOTS = 50;
-	List<Depot> depots = new ArrayList<Depot>();
+	private List<Depot> depots = new ArrayList<Depot>();
 
 	public Company(String name) {
 		this.name = name;
-
 	}
 
 	public String getName() {
@@ -22,7 +21,18 @@ public class Company {
 	}
 
 	public void addDepot(Depot depot) {
+		depot.setCompany(this);
 		depots.add(depot);
 	}
+
+	public List<Depot> getDepots() {
+		return depots;
+	}
+
+	public void setDepots(List<Depot> depots) {
+		this.depots = depots;
+	}
+	
+	
 
 }
