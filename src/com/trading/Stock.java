@@ -3,8 +3,16 @@ package com.trading;
 public class Stock {
 	private Depot depot;
 	private Product product;
+	private Integer quantity;
 	private Double productPrice;
 	private Double deliveryPrice;
+
+	public Stock(Product product, Integer quantity, Double productPrice, Double deliveryPrice) {
+		this.product=product;
+		this.quantity = quantity;
+		this.productPrice = productPrice;
+		this.deliveryPrice = deliveryPrice;
+	}
 
 	public Depot getDepot() {
 		return depot;
@@ -36,6 +44,12 @@ public class Stock {
 
 	public void setDeliveryPrice(Double deliveryPrice) {
 		this.deliveryPrice = deliveryPrice;
+	}
+	
+	public String toString(){
+		return "Product:   " + product.getName() + "\n" +
+				"Quantity: " + quantity;  
+		
 	}
 
 }

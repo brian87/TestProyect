@@ -27,15 +27,18 @@ public class TradeSimulator {
 		Product productB = new Product("Product-B");
 		companyB.addProduct(productB);
 
+		// Depots
 		for (int i = 1; i <= companyA.getMaxNroDepots(); i++) {
-			String nombre = "Depot-" + i;
-			companyA.addDepot(new Depot(nombre));
+			Depot depot = new Depot("Depot-" + i);
+			// Stock for Depot
+			depot.addStock(new Stock(productA,8,3.0,5.0));
+			companyA.addDepot(depot);
 		}
 
 		for (int i = 1; i <= companyB.getMaxNroDepots(); i++) {
-			String nombre = "Depot-" + i;
-			companyB.addDepot(new Depot(nombre));
-		}
+			companyB.addDepot(new Depot("Depot-" + i));
+		}		
+	
 	}
 
 	private void showData() {
@@ -56,20 +59,19 @@ public class TradeSimulator {
 	}
 
 	private void showProduct(Product product) {
-		System.out.println("  PRODUCT: " + product.getName());
+		System.out.println("PRODUCT: " + product.getName());
 
 	}
 
 	private void showDepot(Depot depot) {
-		System.out.println("  DEPOT: " + depot.getName());
+		System.out.println("DEPOT: " + depot.getName());
 		for (Stock stock : depot.getStock()) {
 			showStock(stock);
 		}
 	}
 
 	private void showStock(Stock stock) {
-		System.out.println("    STOCK: " + stock.getProduct().getName());
-		System.out.println("      Depot: " + stock.getDepot().getName());
+		System.out.println(stock);
 	}
 
 }
