@@ -47,6 +47,10 @@ public class Company {
 		return products;
 	}
 	
+	public String toString() {
+		return "COMPANY: " + getName();
+		
+	}
 	
 
 }

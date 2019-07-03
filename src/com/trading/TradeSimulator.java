@@ -48,7 +48,7 @@ public class TradeSimulator {
 	}
 
 	private void showCompany(Company company) {
-		System.out.println("COMPANY: " + company.getName());
+		System.out.println(company);
 		for (Product product : company.getProducts()) {
 			showProduct(product);
 		}
@@ -59,12 +59,12 @@ public class TradeSimulator {
 	}
 
 	private void showProduct(Product product) {
-		System.out.println("PRODUCT: " + product.getName());
+		System.out.println(product);
 
 	}
 
 	private void showDepot(Depot depot) {
-		System.out.println("DEPOT: " + depot.getName());
+		System.out.println(depot);
 		for (Stock stock : depot.getStock()) {
 			showStock(stock);
 		}

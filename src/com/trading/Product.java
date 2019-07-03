@@ -33,5 +33,9 @@ public class Product {
 	public void setProducer(Company producer) {
 		this.producer = producer;
 	}
+	
+	public String toString() {
+		return "PRODUCT: "  + getName();
+	}
 
 }

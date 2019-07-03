@@ -45,5 +45,9 @@ public class Depot {
 		stocks.add(stock);
 	}
 	
+	public String toString() {
+		return "DEPOT: " + getName();
+		
+	}
 
 }
