@@ -3,7 +3,7 @@ package com.trading;
 public class Product {
 
 	private String name;
-	private String type;
+	
 	private Company producer;
 
 	public Product(String name) {
@@ -18,13 +18,6 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 
 	public Company getProducer() {
 		return producer;

@@ -6,6 +6,7 @@ public class Stock {
 	private Integer quantity;
 	private Double productPrice;
 	private Double deliveryPrice;
+	private String type;
 
 	public Stock(Product product, Integer quantity, Double productPrice, Double deliveryPrice) {
 		this.product=product;
@@ -52,6 +53,14 @@ public class Stock {
 				"ProductPrice " + productPrice + "\n" +
 				"DeliveryPrice " + deliveryPrice;  
 		
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }
