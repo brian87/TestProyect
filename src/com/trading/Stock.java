@@ -11,6 +11,7 @@ public class Stock {
 
 	public Stock(Product product, Type type, Integer quantity, Double productPrice, Double deliveryPrice) {
 		this.product=product;
+		this.type = type;
 		this.quantity = quantity;
 		this.productPrice = productPrice;
 		this.deliveryPrice = deliveryPrice;
