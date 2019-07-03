@@ -48,7 +48,9 @@ public class Stock {
 	
 	public String toString(){
 		return "Product:   " + product.getName() + "\n" +
-				"Quantity: " + quantity;  
+				"Quantity: " + quantity + "\n" +
+				"ProductPrice " + productPrice + "\n" +
+				"DeliveryPrice " + deliveryPrice;  
 		
 	}
 

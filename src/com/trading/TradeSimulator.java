@@ -31,12 +31,21 @@ public class TradeSimulator {
 		for (int i = 1; i <= companyA.getMaxNroDepots(); i++) {
 			Depot depot = new Depot("Depot-" + i);
 			// Stock for Depot
-			depot.addStock(new Stock(productA,8,3.0,5.0));
+			Integer quantity = (int)(Math.random()*(100-50+1)+50);
+			double productPrice = (Math.random()*10+1);
+			double deliveryPrice = (Math.random()*10+1);
+			depot.addStock(new Stock(productA,quantity,productPrice,deliveryPrice));
 			companyA.addDepot(depot);
 		}
 
 		for (int i = 1; i <= companyB.getMaxNroDepots(); i++) {
-			companyB.addDepot(new Depot("Depot-" + i));
+			Depot depot = new Depot("Depot-" + i);
+			// Stock for Depot
+			Integer quantity = (int)(Math.random()*(100-50+1)+50);
+			double productPrice = (Math.random()*10+1);
+			double deliveryPrice = (Math.random()*10+1);
+			depot.addStock(new Stock(productB,quantity,productPrice,deliveryPrice));
+			companyB.addDepot(depot);
 		}		
 	
 	}
