@@ -6,9 +6,10 @@ public class Stock {
 	private Integer quantity;
 	private Double productPrice;
 	private Double deliveryPrice;
-	private String type;
+	private Type type;
+	public static enum Type {NATIVE,EXTERNAL};
 
-	public Stock(Product product, Integer quantity, Double productPrice, Double deliveryPrice) {
+	public Stock(Product product, Type type, Integer quantity, Double productPrice, Double deliveryPrice) {
 		this.product=product;
 		this.quantity = quantity;
 		this.productPrice = productPrice;
@@ -49,18 +50,21 @@ public class Stock {
 	
 	public String toString(){
 		return "Product:   " + product.getName() + "\n" +
-				"Quantity: " + quantity + "\n" +
-				"ProductPrice " + productPrice + "\n" +
-				"DeliveryPrice " + deliveryPrice;  
+			   "Type: " + type + "\n" +
+			   "Quantity: " + quantity + "\n" +
+			   "ProductPrice " + String.format("%.2f",productPrice) + "\n" +
+			   "DeliveryPrice " + String.format("%.2f",deliveryPrice);  
 		
 	}
 
-	public String getType() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
+	
+	
 
 }
