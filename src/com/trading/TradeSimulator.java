@@ -71,7 +71,7 @@ public class TradeSimulator {
 		
 		transaccion.setBuyerDepot(productB.getProducer().getDepots().get(0));
 		System.out.println("Buyer " + transaccion.getBuyerDepot().getCompany().getName()+ " "+
-				transaccion.getSellerDepot().getName());
+				transaccion.getSellerDepot().getName());		
 	}
 
 	private Double generateRandomDouble(Double min, Double max) {
