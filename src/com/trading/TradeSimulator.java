@@ -1,6 +1,8 @@
 package com.trading;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -42,23 +44,23 @@ public class TradeSimulator {
 
 		// Depots
 		for (int i = 1; i <= companyA.getMaxNroDepots(); i++) {
-			Double allowance = generateRandomDouble(MIN_ALLOWANCE_FOR_DEPOT, MAX_ALLOWANCE_FOR_DEPOT);
+			Double allowance = getRandomDouble(MIN_ALLOWANCE_FOR_DEPOT, MAX_ALLOWANCE_FOR_DEPOT);
 			Depot depot = new Depot(companyA, "Depot-" + i, allowance);
 			// Stock for Depot
-			Integer quantity = generateRandomInteger(MIN_NATIVE_PRODUCT_QUANTITY, MAX_NATIVE_PRODUCT_QUANTITY);
-			Double productPrice = generateRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			Double deliveryPrice = generateRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
+			Integer quantity = getRandomInteger(MIN_NATIVE_PRODUCT_QUANTITY, MAX_NATIVE_PRODUCT_QUANTITY);
+			Double productPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
+			Double deliveryPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
 			depot.addStock(new Stock(productA, Stock.Type.NATIVE, quantity, productPrice, deliveryPrice));
 			companyA.addDepot(depot);
 		}
 
 		for (int i = 1; i <= companyB.getMaxNroDepots(); i++) {
-			Double allowance = generateRandomDouble(MIN_ALLOWANCE_FOR_DEPOT, MAX_ALLOWANCE_FOR_DEPOT);
+			Double allowance = getRandomDouble(MIN_ALLOWANCE_FOR_DEPOT, MAX_ALLOWANCE_FOR_DEPOT);
 			Depot depot = new Depot(companyB, "Depot-" + i, allowance);
 			// Stock for Depot
-			Integer quantity = generateRandomInteger(MIN_NATIVE_PRODUCT_QUANTITY, MAX_NATIVE_PRODUCT_QUANTITY);
-			Double productPrice = generateRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			Double deliveryPrice = generateRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
+			Integer quantity = getRandomInteger(MIN_NATIVE_PRODUCT_QUANTITY, MAX_NATIVE_PRODUCT_QUANTITY);
+			Double productPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
+			Double deliveryPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
 			depot.addStock(new Stock(productB, Stock.Type.NATIVE, quantity, productPrice, deliveryPrice));
 			companyB.addDepot(depot);
 		}
@@ -66,30 +68,44 @@ public class TradeSimulator {
 	}
 
 	private void simulateTransactions() {
-		// transaccions
 		Transaccion transaccion = new Transaccion();
-		Depot buyerDepot = getRandomDepot(companies.get(0).getDepots());
-		Depot sellerDepot = getRandomDepot(companies.get(1).getDepots());
+		List<Integer> pairRandomIntegers = getPairRandomIntegers(2);
+		Company buyerCompany = companies.get(pairRandomIntegers.get(0));
+		Company sellerCompany = companies.get(pairRandomIntegers.get(1));
+		Depot buyerDepot = buyerCompany.getDepots().get(getRandomInteger(buyerCompany.getDepots().size()));
+		Depot sellerDepot = sellerCompany.getDepots().get(getRandomInteger(sellerCompany.getDepots().size()));
 		transaccion.setBuyerDepot(buyerDepot);
 		transaccion.setSellerDepot(sellerDepot);
 		System.out.println("Buyer " + transaccion.getBuyerDepot());
 		System.out.println("Seller " + transaccion.getSellerDepot());
 
+	}	
+
+	private Double getRandomDouble(Double max) {
+		return getRandomDouble(0.0, max);
 	}
 
-	private Depot getRandomDepot(List<Depot> depots) {
-		Random random = new Random();
-		return depots.get(random.nextInt(depots.size()));
-	}
-
-	private Double generateRandomDouble(Double min, Double max) {
+	private Double getRandomDouble(Double min, Double max) {
 		Random random = new Random();
 		return min + (max - min) * random.nextDouble();
 	}
 
-	private Integer generateRandomInteger(Integer min, Integer max) {
+	private Integer getRandomInteger(Integer max) {
+		return getRandomInteger(0, max);
+	}
+
+	private Integer getRandomInteger(Integer min, Integer max) {
 		Random random = new Random();
 		return min + random.nextInt(max - min);
+	}
+	
+	public List<Integer> getPairRandomIntegers(Integer max) {
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i = 0; i < max; i++) {
+			list.add(i);
+		}
+		Collections.shuffle(list);
+		return list;
 	}
 
 	private void show() {
