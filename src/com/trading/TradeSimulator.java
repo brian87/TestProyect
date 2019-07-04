@@ -61,7 +61,16 @@ public class TradeSimulator {
 			depot.addStock(new Stock(productB, Stock.Type.NATIVE, quantity, productPrice, deliveryPrice));
 			companyB.addDepot(depot);
 		}
-
+		
+		//transaccion
+		Transaccion transaccion = new Transaccion();
+		transaccion.setSellerDepot(productA.getProducer().getDepots().get(0));
+		System.out.println("Seller " + transaccion.getSellerDepot().getCompany().getName()+ " "+
+							transaccion.getSellerDepot().getName());
+		
+		transaccion.setBuyerDepot(productB.getProducer().getDepots().get(0));
+		System.out.println("Buyer " + transaccion.getBuyerDepot().getCompany().getName()+ " "+
+				transaccion.getSellerDepot().getName());
 	}
 
 	private Double generateRandomDouble(Double min, Double max) {
