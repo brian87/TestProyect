@@ -68,6 +68,7 @@ public class TradeSimulator {
 		System.out.println("Seller " + transaccion.getSellerDepot().getCompany().getName()+ " "+
 							transaccion.getSellerDepot().getName());
 		
+		
 		transaccion.setBuyerDepot(productB.getProducer().getDepots().get(0));
 		System.out.println("Buyer " + transaccion.getBuyerDepot().getCompany().getName()+ " "+
 				transaccion.getSellerDepot().getName());
