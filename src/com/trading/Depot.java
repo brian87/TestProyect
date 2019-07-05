@@ -56,10 +56,6 @@ public class Depot {
 		stocks.add(stock);
 	}
 	
-	public void addStock(Product product, Type type, Integer quantity) {
-		
-	}
-	
 	public void removeStock(Product product, Integer quantity) {
 		
 	}

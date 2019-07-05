@@ -65,7 +65,9 @@ public class TradeSimulator {
 			depot.addStock(new Stock(productB, Type.NATIVE, quantity, productPrice, deliveryPrice));
 			companyB.addDepot(depot);
 		}
-
+		
+		pressAnyKeyToContinue();    
+		
 	}
 
 	private void simulateTransactions() {
@@ -140,6 +142,20 @@ public class TradeSimulator {
 
 	private void showStock(Stock stock) {
 		System.out.println(stock);
+	}
+	
+	public void addStock(Product product, Type type, Integer quantity) {
+	
+	}
+	
+	private void pressAnyKeyToContinue() {
+		System.out.println("Press Enter key to continue..."); 
+		try {
+			System.in.read();
+			} 
+		catch(Exception e) {
+			
+		} 
 	}
 
 }
