@@ -76,8 +76,8 @@ public class TradeSimulator {
 		Depot sellerDepot = sellerCompany.getDepots().get(getRandomInteger(sellerCompany.getDepots().size()));
 		transaccion.setBuyerDepot(buyerDepot);
 		transaccion.setSellerDepot(sellerDepot);
-		System.out.println("Buyer " + transaccion.getBuyerDepot());
-		System.out.println("Seller " + transaccion.getSellerDepot());
+		System.out.println("Buyer " + buyerCompany + " " + transaccion.getBuyerDepot());
+		System.out.println("Seller " + sellerCompany + " " + transaccion.getSellerDepot());
 
 	}	
 
