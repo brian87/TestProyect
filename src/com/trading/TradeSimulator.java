@@ -145,7 +145,7 @@ public class TradeSimulator {
 	}
 	
 	public void addStock(Product product, Type type, Integer quantity) {
-	
+		
 	}
 	
 	private void pressAnyKeyToContinue() {
