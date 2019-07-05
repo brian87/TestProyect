@@ -67,4 +67,35 @@ public class Depot {
 
 	}
 
+	public void increaseStock(Product product, Integer quantity, Double total) {
+		Stock stock = null;
+		for(Stock s: stocks) {
+			if(s.getProduct().getName().equals(product.getName())) {
+				stock = s;
+			}
+		}
+		if(stock!=null) { //Product already in depot
+			stock.setQuantity(stock.getQuantity()+quantity);
+		}else { // New product to depot
+			stock= new Stock(product,Type.EXTERNAL,quantity,1.0,2.0); //TODO prices should be random generated
+		}
+		this.allowance=this.allowance-total;
+	}
+
+	public void decreaseStock(Product product, Integer quantity, Double total) {
+		Stock stock = null;
+		for(Stock s: stocks) {
+			if(s.getProduct().getName().equals(product.getName())) {
+				stock = s;
+			}
+		}
+		if(stock!=null) { //Product already in depot
+			stock.setQuantity(stock.getQuantity()-quantity);
+		}else { // Error
+			throw new IllegalStateException("Stock for this product should exits");
+		}
+		this.allowance=this.allowance+total;
+		
+	}
+
 }

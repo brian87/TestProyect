@@ -19,16 +19,27 @@ public class TradeSimulator {
 	private Double MAX_PRODUCT_PRICE = 10.00;
 
 	private List<Company> companies = new ArrayList<Company>();
+	private List<Transaction> transactions =  new ArrayList<Transaction>();
 
 	public static void main(String[] args) {
 		TradeSimulator tradeSimulator = new TradeSimulator();
-		tradeSimulator.init();
-		tradeSimulator.show();
+		
+		waitForKeyPress("1. Initialize data.");
+		tradeSimulator.initData();
+		
+		waitForKeyPress("2. Show generated data.");
+		tradeSimulator.showData();
+		
+		waitForKeyPress("3. Simulate transactions.");
 		tradeSimulator.simulateTransactions();
+		
+		waitForKeyPress("4. Show transactions.");
+		tradeSimulator.showTransactions();
 	}
 
-	private void init() {
-		// Random
+	
+
+	private void initData() {
 
 		// Companies
 		Company companyA = new Company("Company-A");
@@ -65,24 +76,49 @@ public class TradeSimulator {
 			depot.addStock(new Stock(productB, Type.NATIVE, quantity, productPrice, deliveryPrice));
 			companyB.addDepot(depot);
 		}
-		
-		pressAnyKeyToContinue();    
-		
+
 	}
 
 	private void simulateTransactions() {
-		Transaccion transaccion = new Transaccion();
+		//TODO create around 100 transactions...
+		Transaction transaction = getRandomTransaction();
+		processTransaction(transaction);
+
+	}
+	
+	private void showTransactions() {
+		for (Transaction transaction : transactions) {
+			showTransaction(transaction);
+		}
+	}
+
+	private void showTransaction(Transaction transaction) {
+		System.out.println(transaction);
+	}
+
+	private void processTransaction(Transaction transaction) {
+		Depot buyerDepot = transaction.getBuyerDepot();
+		Depot sellerDepot = transaction.getSellerDepot();
+		buyerDepot.increaseStock(transaction.getProduct(), transaction.getQuantity(), transaction.getTotal());
+		sellerDepot.decreaseStock(transaction.getProduct(), transaction.getQuantity(), transaction.getTotal());
+		transactions.add(transaction);
+	}
+
+	private Transaction getRandomTransaction() {
 		List<Integer> pairRandomIntegers = getPairRandomIntegers(2);
 		Company buyerCompany = companies.get(pairRandomIntegers.get(0));
 		Company sellerCompany = companies.get(pairRandomIntegers.get(1));
 		Depot buyerDepot = buyerCompany.getDepots().get(getRandomInteger(buyerCompany.getDepots().size()));
 		Depot sellerDepot = sellerCompany.getDepots().get(getRandomInteger(sellerCompany.getDepots().size()));
-		transaccion.setBuyerDepot(buyerDepot);
-		transaccion.setSellerDepot(sellerDepot);
-		System.out.println("Buyer " + buyerCompany + " " + transaccion.getBuyerDepot());
-		System.out.println("Seller " + sellerCompany + " " + transaccion.getSellerDepot());
 
-	}	
+		Transaction transaction = new Transaction();
+		transaction.setProduct(sellerCompany.getProducts().get(0)); //There's only one product
+		transaction.setBuyerDepot(buyerDepot);
+		transaction.setSellerDepot(sellerDepot);
+		transaction.setQuantity(1); //TODO this value is not easy.
+		transaction.setTotal(1.0); //TODO this is compute depending of quantity and depot prices
+		return transaction;
+	}
 
 	private Double getRandomDouble(Double max) {
 		return getRandomDouble(0.0, max);
@@ -101,7 +137,7 @@ public class TradeSimulator {
 		Random random = new Random();
 		return min + random.nextInt(max - min);
 	}
-	
+
 	public List<Integer> getPairRandomIntegers(Integer max) {
 		List<Integer> list = new ArrayList<Integer>();
 		for (int i = 0; i < max; i++) {
@@ -111,7 +147,7 @@ public class TradeSimulator {
 		return list;
 	}
 
-	private void show() {
+	private void showData() {
 		for (Company company : companies) {
 			showCompany(company);
 		}
@@ -143,19 +179,14 @@ public class TradeSimulator {
 	private void showStock(Stock stock) {
 		System.out.println(stock);
 	}
-	
-	public void addStock(Product product, Type type, Integer quantity) {
-		
-	}
-	
-	private void pressAnyKeyToContinue() {
-		System.out.println("Press Enter key to continue..."); 
+
+	private static void waitForKeyPress(String msg) {
+		System.out.print(msg + " Press ENTER key to continue...");
 		try {
 			System.in.read();
-			} 
-		catch(Exception e) {
-			
-		} 
+		} catch (Exception e) {
+
+		}
 	}
 
 }

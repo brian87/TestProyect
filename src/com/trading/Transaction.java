@@ -2,20 +2,22 @@ package com.trading;
 
 import java.util.Date;
 
-public class Transaccion {
-	private Stock depotProduct;
+public class Transaction {
+	private Product product;
 	private Depot buyerDepot;
 	private Depot sellerDepot;
 	private Integer quantity;
 	private Double total;
 	private Date date;
 
-	public Stock getDepotProduct() {
-		return depotProduct;
+	
+
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setDepotProduct(Stock depotProduct) {
-		this.depotProduct = depotProduct;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public Depot getBuyerDepot() {
@@ -57,5 +59,16 @@ public class Transaccion {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
+	
+	public String toString(){
+		return 
+		   " -------------------------------------------------\n"+
+		   "| Transaction" + " \t \t \t \t \t |\n" +
+		   " -------------------------------------------------\n"+
+		   "| Product \t: " + product.getName() + " \t \t \t |\n" +
+		   "| Quantity \t: " + quantity + "  \t \t \t \t |"+"\n" +
+		   "| Buyer Depot \t: " + buyerDepot.getCompany().getName() + " [" + buyerDepot.getName() + "] \t \t |" + "\n" +
+		   "| Seller Depot \t: " +  sellerDepot.getCompany().getName() + " [" + sellerDepot.getName() + "] \t \t |" + "\n"+
+		   " -------------------------------------------------\n"; 
+	}
 }

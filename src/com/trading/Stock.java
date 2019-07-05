@@ -67,6 +67,14 @@ public class Stock {
 	public void setType(Type type) {
 		this.type = type;
 	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 	
 	
 
