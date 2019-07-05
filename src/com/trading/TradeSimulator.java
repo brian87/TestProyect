@@ -51,7 +51,7 @@ public class TradeSimulator {
 			Integer quantity = getRandomInteger(MIN_NATIVE_PRODUCT_QUANTITY, MAX_NATIVE_PRODUCT_QUANTITY);
 			Double productPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
 			Double deliveryPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			depot.addStock(new Stock(productA, Stock.Type.NATIVE, quantity, productPrice, deliveryPrice));
+			depot.addStock(new Stock(productA, Type.NATIVE, quantity, productPrice, deliveryPrice));
 			companyA.addDepot(depot);
 		}
 
@@ -62,7 +62,7 @@ public class TradeSimulator {
 			Integer quantity = getRandomInteger(MIN_NATIVE_PRODUCT_QUANTITY, MAX_NATIVE_PRODUCT_QUANTITY);
 			Double productPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
 			Double deliveryPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			depot.addStock(new Stock(productB, Stock.Type.NATIVE, quantity, productPrice, deliveryPrice));
+			depot.addStock(new Stock(productB, Type.NATIVE, quantity, productPrice, deliveryPrice));
 			companyB.addDepot(depot);
 		}
 

@@ -7,7 +7,6 @@ public class Stock {
 	private Double productPrice;
 	private Double deliveryPrice;
 	private Type type;
-	public static enum Type {NATIVE,EXTERNAL};
 
 	public Stock(Product product, Type type, Integer quantity, Double productPrice, Double deliveryPrice) {
 		this.product=product;

@@ -56,7 +56,7 @@ public class Depot {
 		stocks.add(stock);
 	}
 	
-	public void addStock(Product product, Integer quantity) {
+	public void addStock(Product product, Type type, Integer quantity) {
 		
 	}
 	
