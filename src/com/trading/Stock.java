@@ -50,11 +50,14 @@ public class Stock {
 	}
 	
 	public String toString(){
-		return "Product:   " + product.getName() + "\n" +
-			   "Type: " + type + "\n" +
-			   "Quantity: " + quantity + "\n" +
-			   "ProductPrice " + String.format("%.2f",productPrice) + "\n" +
-			   "DeliveryPrice " + String.format("%.2f",deliveryPrice);  
+		return " -------------------------------------------------\n"+
+			   "| Product:" + product.getName() + "\t\t" +
+			   "| Type: " + type + " \t |" + "\n" + 
+			   " -------------------------------------------------\n"+
+			   "| Quantity \t: " + quantity + "  \t \t \t \t |"+"\n" +
+			   "| ProductPrice \t: " + String.format("%.2f",productPrice) + "  \t \t \t |" + "\n" +
+			   "| DeliveryPrice : " + String.format("%.2f",deliveryPrice)+ " \t \t \t \t |" + "\n"+
+			   " -------------------------------------------------\n";  
 		
 	}
 

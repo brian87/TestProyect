@@ -28,7 +28,8 @@ public class Product {
 	}
 	
 	public String toString() {
-		return "PRODUCT: "  + getName();
+		return "PRODUCT: "  + getName()+
+				"\n";
 	}
 
 }

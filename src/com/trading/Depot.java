@@ -65,7 +65,9 @@ public class Depot {
 	}
 
 	public String toString() {
-		return "DEPOT: " + getName();
+		return "DEPOT: " + getName()+"\t \t"+
+	           "INITIAL CASH:"+String.format("%.2f", allowance);
+				
 
 	}
 
