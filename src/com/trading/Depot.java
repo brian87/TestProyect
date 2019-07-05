@@ -55,6 +55,14 @@ public class Depot {
 		stock.setDepot(this);
 		stocks.add(stock);
 	}
+	
+	public void addStock(Product product, Integer quantity) {
+		
+	}
+	
+	public void removeStock(Product product, Integer quantity) {
+		
+	}
 
 	public String toString() {
 		return "DEPOT: " + getName();
