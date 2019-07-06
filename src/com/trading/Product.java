@@ -2,10 +2,9 @@ package com.trading;
 
 public class Product {
 
-	private String name;
-	
+	private String name;	
 	private Company producer;
-
+	
 	public Product(String name) {
 		this.name=name;
 	}

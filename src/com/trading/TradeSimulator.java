@@ -116,7 +116,8 @@ public class TradeSimulator {
 		transaction.setBuyerDepot(buyerDepot);
 		transaction.setSellerDepot(sellerDepot);
 		transaction.setQuantity(1); //TODO this value is not easy.
-		transaction.setTotal(1.0); //TODO this is compute depending of quantity and depot prices
+		double total = sellerDepot.getStock(transaction.getProduct()).getDeliveryPrice() + sellerDepot.getStock(transaction.getProduct()).getProductPrice();
+		transaction.setTotal(total); //TODO this is compute depending of quantity and depot prices
 		return transaction;
 	}
 
