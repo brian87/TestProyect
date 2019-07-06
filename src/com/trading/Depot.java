@@ -54,10 +54,7 @@ public class Depot {
 				stock = s;
 			}
 		}
-		if (stock!= null) 
-			return stock;
-		else 
-			return null;
+		return stock;
 	}
 
 	public void setStock(List<Stock> stock) {
