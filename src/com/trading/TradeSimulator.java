@@ -11,8 +11,8 @@ public class TradeSimulator {
 
 	private Integer MIN_NATIVE_PRODUCT_QUANTITY = 15;
 	private Integer MAX_NATIVE_PRODUCT_QUANTITY = 50;
-	private Integer MIN_EXTERNAL_PRODUCT_QUANTITY = 15;
-	private Integer MAX_EXTERNAL_PRODUCT_QUANTITY = 50;
+	private Integer MIN_EXTERNAL_PRODUCT_QUANTITY = 3;
+	private Integer MAX_EXTERNAL_PRODUCT_QUANTITY = 40;
 	private Double MIN_ALLOWANCE_FOR_DEPOT = 50.00;
 	private Double MAX_ALLOWANCE_FOR_DEPOT = 100.00;
 	private Double MIN_PRODUCT_PRICE = 1.00;
