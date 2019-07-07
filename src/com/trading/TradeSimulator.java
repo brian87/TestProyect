@@ -110,17 +110,26 @@ public class TradeSimulator {
 		Company sellerCompany = companies.get(pairRandomIntegers.get(1));
 		Depot buyerDepot = buyerCompany.getDepots().get(getRandomInteger(buyerCompany.getDepots().size()));
 		Depot sellerDepot = sellerCompany.getDepots().get(getRandomInteger(sellerCompany.getDepots().size()));
-
+		
 		Transaction transaction = new Transaction();
 		transaction.setBuyerDepot(buyerDepot);
 		transaction.setSellerDepot(sellerDepot);
-		transaction.setProduct(sellerCompany.getProducts().get(0)); //There's only one product			
-		double total = sellerDepot.getStock(transaction.getProduct()).getDeliveryPrice() + sellerDepot.getStock(transaction.getProduct()).getProductPrice();
-		transaction.setTotal(total); //TODO this is compute depending of quantity and depot prices
+		transaction.setProduct(sellerCompany.getProducts().get(0)); //There's only one product	
+		double totalSeller = sellerDepot.getStock(transaction.getProduct()).getDeliveryPrice() + sellerDepot.getStock(transaction.getProduct()).getProductPrice();
+		transaction.setTotal(totalSeller); //TODO this is compute depending of quantity and depot prices
 		Integer n = getMaxQuantityForBuying(buyerDepot);
-		System.out.println("n " + n );
-		Integer m = (int)(buyerDepot.getAllowance()/ transaction.getTotal());
+		Integer m = (int)(buyerDepot.getAllowance()/totalSeller);
 		transaction.setQuantity(getRandomInteger(Math.min(n, m))); //TODO this value is not easy.
+		double total = 0;
+		for (int i = 0; i < transaction.getQuantity();i++ ) {
+			 total +=  transaction.getTotal();
+		}
+		transaction.setTotal(total);
+		int x = buyerDepot.getStock(buyerDepot).getQuantity()+transaction.getQuantity();
+		int y = sellerDepot.getStock(sellerDepot).getQuantity()-transaction.getQuantity();
+		buyerDepot.getStock(buyerDepot).setQuantity(x);
+		sellerDepot.getStock(sellerDepot).setQuantity(y);
+		
 		return transaction;
 	}
 

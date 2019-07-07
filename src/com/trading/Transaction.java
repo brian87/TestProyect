@@ -7,7 +7,7 @@ public class Transaction {
 	private Depot buyerDepot;
 	private Depot sellerDepot;
 	private Integer quantity;
-	private Double total;
+	private Double total = 0.0;
 	private Date date;
 	
 	
@@ -70,6 +70,7 @@ public class Transaction {
 		   "| Quantity \t: " + quantity + "  \t \t \t \t |"+"\n" +
 		   "| Buyer Depot \t: " + buyerDepot.getCompany().getName() + " [" + buyerDepot.getName() + "] \t \t |" + "\n" +
 		   "| Seller Depot \t: " +  sellerDepot.getCompany().getName() + " [" + sellerDepot.getName() + "] \t \t |" + "\n"+
+		   "| Total \t: " + String.format("%.2f",total) + " \t \t \t |\n" +
 		   " -------------------------------------------------\n"; 
 	}
 }
