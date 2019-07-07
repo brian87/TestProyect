@@ -9,7 +9,7 @@ public class Transaction {
 	private Integer quantity;
 	private Double total;
 	private Date date;
-
+	
 	
 
 	public Product getProduct() {
@@ -59,6 +59,7 @@ public class Transaction {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
 	
 	public String toString(){
 		return 

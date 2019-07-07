@@ -112,10 +112,11 @@ public class TradeSimulator {
 		Depot sellerDepot = sellerCompany.getDepots().get(getRandomInteger(sellerCompany.getDepots().size()));
 
 		Transaction transaction = new Transaction();
-		transaction.setProduct(sellerCompany.getProducts().get(0)); //There's only one product
 		transaction.setBuyerDepot(buyerDepot);
 		transaction.setSellerDepot(sellerDepot);
-		transaction.setQuantity(1); //TODO this value is not easy.
+		Integer n = getMaxQuantityForBuying(buyerDepot , sellerDepot);
+		transaction.setQuantity(getRandomInteger(n)); //TODO this value is not easy.
+		transaction.setProduct(sellerCompany.getProducts().get(0)); //There's only one product			
 		double total = sellerDepot.getStock(transaction.getProduct()).getDeliveryPrice() + sellerDepot.getStock(transaction.getProduct()).getProductPrice();
 		transaction.setTotal(total); //TODO this is compute depending of quantity and depot prices
 		return transaction;
@@ -179,6 +180,11 @@ public class TradeSimulator {
 
 	private void showStock(Stock stock) {
 		System.out.println(stock);
+	}
+	
+	private Integer getMaxQuantityForBuying(Depot buyer, Depot seller) {
+		Integer n = MAX_EXTERNAL_PRODUCT_QUANTITY - buyer.getStock(buyer).getQuantity();
+		return Math.min((int)(buyer.getAllowance()/(seller.getStock(seller).getDeliveryPrice() + seller.getStock(seller).getDeliveryPrice())),n);
 	}
 
 	private static void waitForKeyPress(String msg) {
