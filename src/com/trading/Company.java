@@ -21,8 +21,7 @@ public class Company {
 		this.name = name;
 	}
 
-	public void addDepot(Depot depot) {
-		depot.setCompany(this);
+	public void addDepot(Depot depot) {	
 		depots.add(depot);
 	}
 

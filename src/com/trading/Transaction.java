@@ -7,7 +7,7 @@ public class Transaction {
 	private Depot buyerDepot;
 	private Depot sellerDepot;
 	private Integer quantity;
-	private Double total = 0.0;
+	private Double total;
 	private Date date;
 	
 	

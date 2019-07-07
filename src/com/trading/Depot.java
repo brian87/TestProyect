@@ -56,16 +56,6 @@ public class Depot {
 		}
 		return stock;
 	}
-	
-	public Stock getStock(Depot depot) {
-		Stock stock = null;
-		for(Stock s: stocks) {
-			if(s.getDepot().equals(depot)) {
-				stock = s;
-			}
-		}
-		return stock;
-	}
 
 	public void setStock(List<Stock> stock) {
 		this.stocks = stock;
