@@ -94,13 +94,13 @@ public class TradeSimulator {
 	}
 
 	private void simulateTransactions() {
-		for (int i = 0; i <= 5; i++) {
+		for (int i = 0; i <= 100; i++) {
 			//Generate Random Transaction until it's is valid to process
 			Transaction transaction=null;
-			do {
-				transaction = getRandomTransaction();
-			}while(!isValidTransaction(transaction));
-			
+			for (int j=0; j <= 10; j++) {
+				if(!isValidTransaction(transaction))
+					return;
+			}
 			processTransaction(transaction);
 			transactions.add(transaction);
 		}
@@ -118,8 +118,11 @@ public class TradeSimulator {
 	private void processTransaction(Transaction transaction) {
 		Depot buyerDepot = transaction.getBuyerDepot();
 		Depot sellerDepot = transaction.getSellerDepot();
-		buyerDepot.increaseStock(transaction.getProduct(), transaction.getQuantity(), transaction.getTotal());
-		sellerDepot.decreaseStock(transaction.getProduct(), transaction.getQuantity(), transaction.getTotal());	
+		buyerDepot.increaseStock(buyerDepot.getStock(transaction.getProduct()), transaction.getQuantity());
+		sellerDepot.decreaseStock(sellerDepot.getStock(transaction.getProduct()), transaction.getQuantity());
+		buyerDepot.decreaseAlowance(transaction.getTotal());
+		sellerDepot.increaseAlowance(transaction.getTotal());
+		
 	}
 
 	private Transaction getRandomTransaction() {

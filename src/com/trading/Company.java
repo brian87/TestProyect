@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Company {
 	private String name;
-	private int MAX_NO_DEPOTS = 1;
+	private int MAX_NO_DEPOTS = 50;
 	private List<Depot> depots = new ArrayList<Depot>();
 	private List<Product> products = new ArrayList<Product>();
 
