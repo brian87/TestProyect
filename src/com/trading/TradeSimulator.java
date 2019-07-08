@@ -98,8 +98,10 @@ public class TradeSimulator {
 			//Generate Random Transaction until it's is valid to process
 			Transaction transaction=null;
 			for (int j=0; j <= 10; j++) {
-				if(!isValidTransaction(transaction))
-					return;
+				transaction = getRandomTransaction();
+				if(!isValidTransaction(transaction)) {
+					break;
+				}
 			}
 			processTransaction(transaction);
 			transactions.add(transaction);
