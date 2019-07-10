@@ -2,7 +2,10 @@ package com.trading;
 //Java 1.8
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class TradeSimulator {
 
@@ -16,23 +19,29 @@ public class TradeSimulator {
 	private Double MAX_PRODUCT_PRICE = 10.00;
 
 	private List<Company> companies = new ArrayList<Company>();
-	private List<Transaction> transactions = new ArrayList<Transaction>();
-
+	private List<Transaction> transactions =  new ArrayList<Transaction>();
+	static int maxNumberTransactions=100;
+	static int numberTransaction=1;
+	
 	public static void main(String[] args) {
 		TradeSimulator tradeSimulator = new TradeSimulator();
-
+		
 		waitForKeyPress("1. Initialize data.");
 		tradeSimulator.initData();
-
+		
 		waitForKeyPress("2. Show generated data.");
 		tradeSimulator.showData();
-
+		
 		waitForKeyPress("3. Simulate transactions.");
+		for(;numberTransaction<=maxNumberTransactions;numberTransaction++) {
 		tradeSimulator.simulateTransactions();
+		}
+		
+		System.out.println("End");
 
-		waitForKeyPress("4. Show transactions.");
-		tradeSimulator.showTransactions();
 	}
+
+	
 
 	private void initData() {
 
@@ -49,140 +58,204 @@ public class TradeSimulator {
 		Product productB = new Product("Product-B");
 		companyB.addProduct(productB);
 
-		// Depots for CompanyA
+		// Depots
 		for (int i = 1; i <= companyA.getMaxNroDepots(); i++) {
-			Double allowance = RandomUtil.getRandomDouble(MIN_ALLOWANCE_FOR_DEPOT, MAX_ALLOWANCE_FOR_DEPOT);
-			Depot depot = new Depot(companyA, "Depot-" + i, allowance);
-			
-			// Initial Stock for NATIVE product
-			Integer quantity = RandomUtil.getRandomInteger(MIN_NATIVE_PRODUCT_QUANTITY, MAX_NATIVE_PRODUCT_QUANTITY);
-			Double productPrice = RandomUtil.getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			Double deliveryPrice = RandomUtil.getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			depot.addStock(new Stock(productA, Type.NATIVE, quantity, productPrice, deliveryPrice));
-			
-			// Initial Stock for EXTERNAL product
-			quantity = RandomUtil.getRandomInteger(MIN_EXTERNAL_PRODUCT_QUANTITY, MAX_EXTERNAL_PRODUCT_QUANTITY);
-			productPrice = RandomUtil.getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			deliveryPrice = RandomUtil.getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			depot.addStock(new Stock(productB, Type.EXTERNAL, quantity, productPrice, deliveryPrice));
-			
-			depot.setCompany(companyA);
+			Double allowanceA = getRandomDouble(MIN_ALLOWANCE_FOR_DEPOT, MAX_ALLOWANCE_FOR_DEPOT);
+			Depot depot = new Depot(companyA, "Depot-" + i, allowanceA);
+			// Stock for Depot
+			Integer quantity = getRandomInteger(MIN_NATIVE_PRODUCT_QUANTITY, MAX_NATIVE_PRODUCT_QUANTITY);
+			Integer externalquantity = getRandomInteger(MIN_EXTERNAL_PRODUCT_QUANTITY, MAX_EXTERNAL_PRODUCT_QUANTITY);
+			Double productPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
+			Double deliveryPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
+			depot.addStock(new Stock(productA, Type.NATIVE,allowanceA,0.0, quantity,externalquantity,productPrice,deliveryPrice
+					                ,productB, Type.EXTERNAL,0.0,0.0, 0,0, productPrice, deliveryPrice));
 			companyA.addDepot(depot);
 		}
+				
 
-		// Depots for CompanyB
 		for (int i = 1; i <= companyB.getMaxNroDepots(); i++) {
-			Double allowance = RandomUtil.getRandomDouble(MIN_ALLOWANCE_FOR_DEPOT, MAX_ALLOWANCE_FOR_DEPOT);
-			Depot depot = new Depot(companyB, "Depot-" + i, allowance);
-			
-			// Initial Stock for NATIVE product
-			Integer quantity = RandomUtil.getRandomInteger(MIN_NATIVE_PRODUCT_QUANTITY, MAX_NATIVE_PRODUCT_QUANTITY);
-			Double productPrice = RandomUtil.getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			Double deliveryPrice = RandomUtil.getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			depot.addStock(new Stock(productB, Type.NATIVE, quantity, productPrice, deliveryPrice));
-			
-			// Initial Stock for EXTERNAL product
-			quantity = RandomUtil.getRandomInteger(MIN_EXTERNAL_PRODUCT_QUANTITY, MAX_EXTERNAL_PRODUCT_QUANTITY);
-			productPrice = RandomUtil.getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			deliveryPrice = RandomUtil.getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
-			depot.addStock(new Stock(productA, Type.EXTERNAL, quantity, productPrice, deliveryPrice));
-			
-			depot.setCompany(companyB);
+			Double allowanceB = getRandomDouble(MIN_ALLOWANCE_FOR_DEPOT, MAX_ALLOWANCE_FOR_DEPOT);
+			Depot depot = new Depot(companyB, "Depot-" + i, allowanceB);
+			// Stock for Depot
+			Integer quantity = getRandomInteger(MIN_NATIVE_PRODUCT_QUANTITY, MAX_NATIVE_PRODUCT_QUANTITY);
+			Integer externalquantity = getRandomInteger(MIN_EXTERNAL_PRODUCT_QUANTITY, MAX_EXTERNAL_PRODUCT_QUANTITY);
+			Double productPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
+			Double deliveryPrice = getRandomDouble(MIN_PRODUCT_PRICE, MAX_PRODUCT_PRICE);
+			depot.addStock(new Stock(productB, Type.NATIVE,allowanceB,0.0, quantity,externalquantity, productPrice, deliveryPrice
+					                ,productA, Type.EXTERNAL,0.0,0.0,0,0, productPrice, deliveryPrice));
+				
 			companyB.addDepot(depot);
 		}
 
 	}
 
 	private void simulateTransactions() {
-		for (int i = 0; i <= 100; i++) {
-			//Generate Random Transaction until it's is valid to process
-			Transaction transaction=null;
-			for (int j=0; j <= 10; j++) {
-				transaction = getRandomTransaction();
-				if(!isValidTransaction(transaction)) {
-					break;
-				}
-			}
-			processTransaction(transaction);
-			transactions.add(transaction);
-		}
+		//TODO create around 100 transactions...
+
+		Transaction transaction = getRandomTransaction();
+		processTransaction(transaction);
 
 	}
-
-	private boolean isValidTransaction(Transaction transaction) {
-		// Quantity == 0 is invalid. 
-		if(transaction.getQuantity()==0) {
-			return false;	
+	
+	private void showTransactions() {
+		for (Transaction transaction : transactions) {
+			showTransaction(transaction);
 		}
-		return true;
+	}
+
+	private void showTransaction(Transaction transaction) {
+//		System.out.println(transaction);
 	}
 
 	private void processTransaction(Transaction transaction) {
 		Depot buyerDepot = transaction.getBuyerDepot();
 		Depot sellerDepot = transaction.getSellerDepot();
-		buyerDepot.increaseStock(buyerDepot.getStock(transaction.getProduct()), transaction.getQuantity());
-		sellerDepot.decreaseStock(sellerDepot.getStock(transaction.getProduct()), transaction.getQuantity());
-		buyerDepot.decreaseAlowance(transaction.getTotal());
-		sellerDepot.increaseAlowance(transaction.getTotal());
-		
+        transactions.add(transaction);
 	}
 
-	private Transaction getRandomTransaction() {
-		List<Integer> pairRandomIntegers = RandomUtil.getPairRandomIntegers(2);
-		Company buyerCompany = companies.get(pairRandomIntegers.get(0));
-		Company sellerCompany = companies.get(pairRandomIntegers.get(1));
-		Depot buyerDepot = buyerCompany.getDepots().get(RandomUtil.getRandomInteger(buyerCompany.getDepots().size()));
-		Depot sellerDepot = sellerCompany.getDepots()
-				.get(RandomUtil.getRandomInteger(sellerCompany.getDepots().size()));
-		Product product = sellerCompany.getProducts().get(0); // There's only one product
-		Stock sellerStock = sellerDepot.getStock(product);// TODO This stock should be Internal always.
-		Stock buyerStock = buyerDepot.getStock(product); // TODO This stock should be External always.
-
-		Integer quantity = getRandomQuantity(sellerDepot, buyerDepot, product);
-		Double total = (sellerStock.getDeliveryPrice() + sellerStock.getProductPrice()) * quantity;
+	private Transaction getRandomTransaction(){
+		//set a Random quantity to trade
+		int CuantityToTrade=getRandomInteger(3,40);
+		//set Random buyer and seller Depots
+ 		List<Integer> pairRandomIntegers = getPairRandomIntegers(2);
+		Company sellerCompany = companies.get(pairRandomIntegers.get(0));
+		Company buyerCompany = companies.get(pairRandomIntegers.get(1));
+		//initializing values to validate transaction
 		
-		Transaction transaction = new Transaction();
-		transaction.setBuyerDepot(buyerDepot);
-		transaction.setSellerDepot(sellerDepot);
-		transaction.setProduct(product);
-		transaction.setQuantity(quantity);
-		transaction.setTotal(total);
+		Depot buyerDepot = buyerCompany.getDepots().get(getRandomInteger(buyerCompany.getDepots().size()));
+		Depot sellerDepot = sellerCompany.getDepots().get(getRandomInteger(sellerCompany.getDepots().size()));
+		Product sellerProduct=sellerDepot.getStock().get(0).getProduct();
+		Product buyerProduct=sellerDepot.getStock().get(0).getProduct();
+		Double productSellerPrice=sellerDepot.getStock().get(0).getProductPrice();
+		Double deliverySellerPrice=sellerDepot.getStock().get(0).getDeliveryPrice();
+		Double initialCashBuyerDepot=buyerDepot.getStock().get(0).getInitialCashNativeDepot();
+		Double initialCashSellerDepot=sellerDepot.getStock().get(0).getInitialCashNativeDepot();
+		Double totalCost=CuantityToTrade*(productSellerPrice+deliverySellerPrice);
+		int externalQuantity=buyerDepot.getStock().get(0).getNativeDepotExternalQuantity()+CuantityToTrade;
+		int buyerQuantity=buyerDepot.getStock().get(0).getQuantity();
+		int sellerQuantity=sellerDepot.getStock().get(0).getQuantity();
+		int externalDepotNativeQuantity=sellerDepot.getStock().get(0).getNativeDepotExternalQuantity();//este
+		int nativeDepotExternalQuantity=buyerDepot.getStock().get(0).getNativeDepotExternalQuantity();
 		
-		return transaction;
+		if (CheckLimit( CuantityToTrade,buyerQuantity,sellerQuantity)==true && 
+			TransactionSellertoBuyer(CuantityToTrade,productSellerPrice,deliverySellerPrice,initialCashBuyerDepot,totalCost,nativeDepotExternalQuantity)==true) {
+			
+			Transaction transaction = new Transaction(sellerProduct,buyerDepot,sellerDepot,CuantityToTrade,externalDepotNativeQuantity,
+					productSellerPrice,deliverySellerPrice,totalCost);
+			System.out.println("\n Number transaction : "+numberTransaction + "\n");
+			System.out.println(transaction);
+			buyerDepot.getStock().get(0).setInitialCashNativeDepot(initialCashBuyerDepot-totalCost);
+			sellerDepot.getStock().get(0).setInitialCashNativeDepot(initialCashSellerDepot+totalCost);
+ 			sellerDepot.getStock().get(0).setExternalDepotNativeQuantity(externalDepotNativeQuantity);
+ 			buyerDepot.getStock().get(0).setNativeDepotExternalQuantity(nativeDepotExternalQuantity+CuantityToTrade);
+ 			
+		}
+		else {
+			if(maxNumberTransactions>=numberTransaction) {
+		    getRandomTransaction();
+			}
+		}
+		Transaction transaction = new Transaction(sellerProduct,buyerDepot,sellerDepot,CuantityToTrade,externalQuantity,
+				productSellerPrice,deliverySellerPrice,totalCost);
+	return transaction;
 	}
 
-	private Integer getRandomQuantity(Depot sellerDepot, Depot buyerDepot, Product product) {
-		// Calc limits for Quantity allowed
-		Stock sellerStock = sellerDepot.getStock(product);// TODO This stock should be Internal always.
-		Stock buyerStock = buyerDepot.getStock(product); // TODO This stock should be External always.
-		Integer maxQuantityBuying = MAX_EXTERNAL_PRODUCT_QUANTITY - buyerStock.getQuantity();
-		Integer maxQuantitySelling = sellerStock.getQuantity() - MIN_NATIVE_PRODUCT_QUANTITY;
-		Integer maxAlloweQuantity = Math.min(maxQuantityBuying, maxQuantitySelling);
-		//TODO  quantities cannot be negative before this line.
-		if(maxAlloweQuantity== 0) {
-			return 0;
-		}else {
-			return RandomUtil.getRandomInteger(1, maxAlloweQuantity);
-		}	
-		
+	private Double getRandomDouble(Double max) {
+		return getRandomDouble(0.0, max);
+	}
+
+	private Double getRandomDouble(Double min, Double max) {
+		Random random1 = new Random();
+		return min + (max - min) * random1.nextDouble();
+	}
+
+	private Integer getRandomInteger(Integer max) {
+		return getRandomInteger(0, max);
+	}
+
+	private Integer getRandomInteger(Integer min, Integer max) {
+		Random random = new Random();
+		return min + random.nextInt(max - min);
+	}
+
+	public List<Integer> getPairRandomIntegers(Integer max) {
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i = 0; i < max; i++) {
+			list.add(i);
+		}
+		Collections.shuffle(list);
+		return list;
 	}
 
 	private void showData() {
-		Logger.showCompanies(companies);
+		for (Company company : companies) {
+			showCompany(company);
+		}
 	}
 
-	private void showTransactions() {
-		Logger.showTransactions(transactions);
+	private void showCompany(Company company) {
+		System.out.println(company);
+		for (Product product : company.getProducts()) {
+			showProduct(product);
+		}
+		for (Depot depot : company.getDepots()) {
+			showDepot(depot);
+		}
 
+	}
+
+	private void showProduct(Product product) {
+		System.out.println(product);
+
+	}
+
+	private void showDepot(Depot depot) {
+		System.out.println(depot);
+		for (Stock stock : depot.getStock()) {
+			showStock(stock);
+		}
+	}
+
+	private void showStock(Stock stock) {
+		System.out.println(stock);
 	}
 
 	private static void waitForKeyPress(String msg) {
-		System.out.print(msg + " Press ENTER key to continue...");
+		System.out.print(msg + " Press ENTER key to continue...\n");
 		try {
 			System.in.read();
 		} catch (Exception e) {
 
+			
+			
 		}
+	}
+	
+	private boolean CheckLimit(int CuantityToTrade,int buyerQuantity,int sellerQuantity) {
+		boolean bool=false;
+		if((buyerQuantity>=15 && buyerQuantity<=50 
+		    && sellerQuantity>=15 && sellerQuantity<=50
+		    && CuantityToTrade>=3 && CuantityToTrade<=40 
+		    && (CuantityToTrade+15)<=sellerQuantity)//The min native products must be over 15
+		    ==true){
+			bool=true;
+		}
+		else{
+			bool=false;
+			};
+	return bool;
+	}
+	
+	private boolean TransactionSellertoBuyer(int CuantityToTrade,Double productSellerPrice,Double deliverySellerPrice,Double NativeDepotCash,Double totalCost, int nativeDepotExternalQuantity) {
+		boolean bool=false;
+		if(NativeDepotCash>totalCost && NativeDepotCash>0 && NativeDepotCash-totalCost>=0 && nativeDepotExternalQuantity+CuantityToTrade<=40) {
+			bool=true;
+		}
+		else {
+			bool=false;
+		}
+		return bool;
 	}
 
 }
+

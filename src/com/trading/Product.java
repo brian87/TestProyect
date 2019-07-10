@@ -27,8 +27,7 @@ public class Product {
 	}
 	
 	public String toString() {
-		return "PRODUCT: "  + getName()+
-				"\n";
+		return "Product\t: "  + getName();
 	}
 
 }
